@@ -31,6 +31,19 @@ exports.signIn = async (req, res) => {
     }
 };
 
+exports.updateProfile = async (req, res) => {
+    try {
+        Object.keys(req.body).forEach(
+            (update) => (req.user[update] = req.body[update]),
+        );
+
+        await req.user.save();
+        res.json(req.user);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
 exports.logout = async (req, res) => {
     const user = req.user;
 
@@ -60,10 +73,9 @@ exports.logoutFromAll = async (req, res) => {
 };
 
 exports.isAuth = async (req, res, next) => {
-    const token = req.header('Authorization').replace('Bearer ', '');
-    const { _id } = jwt.verify(token, 'secret');
-
     try {
+        const token = req.header('Authorization').replace('Bearer ', '');
+        const { _id } = jwt.verify(token, 'secret');
         const user = await User.findOne({ _id, 'tokens.token': token });
 
         if (!user) {
@@ -74,6 +86,6 @@ exports.isAuth = async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
-        res.status(401).json({ error: error.message });
+        res.status(401).json({ error: 'Not Authorized' });
     }
 };

@@ -28,6 +28,18 @@ const userSchema = mongoose.Schema({
     ],
 });
 
+userSchema.virtual('lists', {
+    ref: 'List',
+    localField: '_id',
+    foreignField: 'userId',
+});
+
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'userId',
+});
+
 userSchema.pre('save', async function (next) {
     const user = this;
 
