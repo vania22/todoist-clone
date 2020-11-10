@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 exports.signUp = async (req, res) => {
     try {
@@ -27,5 +28,52 @@ exports.signIn = async (req, res) => {
         res.json({ user, token });
     } catch (error) {
         res.status(400).json({ error: 'Wrong credentials provided' });
+    }
+};
+
+exports.logout = async (req, res) => {
+    const user = req.user;
+
+    user.tokens = user.tokens.filter(({ token }) => token !== req.token);
+
+    try {
+        await user.save();
+
+        res.json({ message: 'Successfully logged out' });
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+};
+
+exports.logoutFromAll = async (req, res) => {
+    const user = req.user;
+
+    user.tokens = [];
+
+    try {
+        await user.save();
+
+        res.json({ message: 'Successfully logged out from all accounts' });
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+};
+
+exports.isAuth = async (req, res, next) => {
+    const token = req.header('Authorization').replace('Bearer ', '');
+    const { _id } = jwt.verify(token, 'secret');
+
+    try {
+        const user = await User.findOne({ _id, 'tokens.token': token });
+
+        if (!user) {
+            throw new Error('Not Authorized');
+        }
+
+        req.token = token;
+        req.user = user;
+        next();
+    } catch (error) {
+        res.status(401).json({ error: error.message });
     }
 };
