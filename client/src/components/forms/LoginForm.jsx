@@ -4,17 +4,23 @@ import * as Yup from 'yup';
 
 import ErrorLabel from './ErrorLabel';
 
+import './styles.scss';
+
 const LoginForm = () => {
     const initialValues = {
-        email: 'krupskiy111@gmail.com',
+        email: '',
         password: '',
     };
 
     const validationSchema = Yup.object({
         email: Yup.string()
+            .trim()
             .required('Please provide an email')
             .email('Please use valid email address'),
-        password: Yup.string().required('Please provide a password'),
+        password: Yup.string()
+            .trim()
+            .min(6, 'Password should be at least 6 characters long')
+            .required('Please provide a valid password'),
     });
 
     const onSubmit = async (values, onSubmitProps) => {
@@ -30,7 +36,7 @@ const LoginForm = () => {
             validateOnBlur
         >
             {(formik) => (
-                <Form>
+                <Form className="form">
                     <div className="form-group">
                         <label className="form-label" htmlFor="email">
                             Email
@@ -59,7 +65,7 @@ const LoginForm = () => {
                     </div>
 
                     <button
-                        className="authentication--btn"
+                        className="form-btn"
                         type="submit"
                         disabled={formik.isSubmitting || !formik.isValid}
                     >

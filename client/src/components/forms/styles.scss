@@ -1,0 +1,41 @@
+.form {
+    margin-top: 30px;
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-label {
+        font-weight: 700;
+        padding: 10px 0;
+    }
+
+    .form-input {
+        padding: 0.5rem;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+    }
+
+    .form-btn {
+        border: 0;
+        border-radius: 5px;
+        margin-top: 30px;
+        background-color: #db4c3f;
+        padding: 9px 12px;
+        color: white;
+        width: 100%;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.97;
+        }
+
+        &:active {
+            opacity: 1;
+        }
+    }
+
+    .form-error-label {
+        color: #e44a6b;
+    }
+}

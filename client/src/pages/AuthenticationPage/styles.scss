@@ -1,21 +1,44 @@
 .authentication-background {
-    height: 100vh;
+    height: auto;
     width: 100vw;
     background-color: #fafafa;
-    padding-top: 100px;
-    padding-bottom: 250px;
+    height: 100%;
+    padding-top: 15%;
+    padding-bottom: 10%;
+    overflow: auto;
 }
 
-.container {
-    margin: 0 auto;
-    margin-top: 30px;
+.authentication-container {
+    margin: auto;
     padding: 30px;
     width: 50%;
-    height: 100%;
     background-color: #fff;
-
+    max-width: 460px;
     h1 {
         font-size: 1.8rem;
         margin-top: 30px;
+    }
+}
+
+.authentication-separator {
+    margin-top: 30px;
+    height: 1px;
+    background-color: #cccccc;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.authentication-redirect {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 13px;
+
+    a {
+        color: #db4c3f;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
