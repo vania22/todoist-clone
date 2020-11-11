@@ -33,9 +33,19 @@
         &:active {
             opacity: 1;
         }
+
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 
     .form-error-label {
         color: #e44a6b;
+    }
+
+    .form-error-label--big {
+        color: #e44a6b;
+        margin-top: 30px;
+        text-align: center;
     }
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./db');
 const bodyparser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const userRoutes = require('./routes/user');
 const listRoutes = require('./routes/list');
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(morgan('combined'));
 app.use(bodyparser.json());
+app.use(cors());
 
 app.use(userRoutes);
 app.use(listRoutes);

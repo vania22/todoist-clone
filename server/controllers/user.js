@@ -12,7 +12,9 @@ exports.signUp = async (req, res) => {
             token,
         });
     } catch (error) {
-        res.status(400).json({ error: 'User with given email already exists' });
+        res.status(400).json({
+            error: 'User with given email already exists',
+        });
     }
 };
 
