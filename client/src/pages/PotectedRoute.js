@@ -18,7 +18,7 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
                 return <Redirect to='/signup'/>
             }
         }
-        return  <Component {...props} />
+        return <Component {...props} />
     }}/>
 }
 

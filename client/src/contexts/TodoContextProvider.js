@@ -1,8 +1,8 @@
-import React, { useReducer, useState } from 'react';
+import React, {useReducer} from 'react';
 
 export const TodoContext = React.createContext([]);
 
-const TodoContextProvider = ({ children }) => {
+const TodoContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, {});
 
     function reducer(state, action) {
@@ -13,7 +13,7 @@ const TodoContextProvider = ({ children }) => {
     }
 
     return (
-        <TodoContext.Provider value={{ state, dispatch}}>
+        <TodoContext.Provider value={{state, dispatch}}>
             {children}
         </TodoContext.Provider>
     );

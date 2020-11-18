@@ -1,5 +1,4 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
 
 import AuthenticationPage from './pages/AuthenticationPage/';
 import PotectedRoute from "./pages/PotectedRoute";
@@ -21,6 +20,7 @@ const App = () => {
             />
             <PotectedRoute
                 path="/"
+                exact
                 component={HomePage}
             />
 
