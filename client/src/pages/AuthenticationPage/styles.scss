@@ -1,3 +1,5 @@
+@import "../../globalStyles/_variables";
+
 .authentication-background {
     width: 100vw;
     background-color: #fafafa;
@@ -45,7 +47,7 @@
     font-size: 13px;
 
     a {
-        color: #db4c3f;
+        color: $primary_color;
         text-decoration: none;
         margin-left: 5px;
 

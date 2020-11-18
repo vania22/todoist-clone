@@ -10,7 +10,7 @@ const AuthenticationPage = ({signin}) => {
     return (
         <div className="authentication-background">
             <div className="authentication-container">
-                <a href="/">
+                <a href="#">
                     <img
                         className="logo"
                         alt="Todoist"

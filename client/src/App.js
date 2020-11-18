@@ -20,7 +20,6 @@ const App = () => {
             />
             <PotectedRoute
                 path="/"
-                exact
                 component={HomePage}
             />
 

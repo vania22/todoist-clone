@@ -1,0 +1,15 @@
+@import "../../globalStyles/_variables";
+
+.home-left-panel {
+  max-width: 450px;
+  width: 30%;
+  background-color: $light-gray;
+  padding: 20px;
+  padding-right: 0;
+}
+
+.lists-container {
+ a {
+   text-decoration: none;
+ }
+}

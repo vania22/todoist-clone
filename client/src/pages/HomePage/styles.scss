@@ -1,0 +1,24 @@
+@import "../../globalStyles/_variables";
+
+.home-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background-color: #fafafa;
+  height: 100%;
+  padding-top: 15%;
+  padding-bottom: 10%;
+  overflow: auto;
+}
+
+.home-wrapper {
+  width: 80%;
+  max-width: 1570px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.home-container {
+  display: flex;
+}

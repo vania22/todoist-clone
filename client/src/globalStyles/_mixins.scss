@@ -1,0 +1,21 @@
+@mixin list-item-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  cursor: pointer;
+  padding: 5px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  margin-bottom: 5px;
+  user-select: none;
+  transition: background-color 0.1s linear;
+
+  @content
+}
+
+@mixin active-list-item {
+  background-color: $darker-white;
+  box-shadow: 4px 2px 27px -13px rgba(0, 0, 0, 0.69);
+}
