@@ -1,12 +1,21 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, {useState, useContext} from 'react';
+import {useHistory} from 'react-router-dom';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 
 import ErrorLabel from './ErrorLabel';
 
+import {UserContext} from '../../contexts/UserContextProvider.js';
+import {setUserTokenToLocalStorage, signIn} from "../../api/authentication";
+
 import './styles.scss';
 
-const LoginForm = () => {
+
+const SigninForm = () => {
+    const {setUser} = useContext(UserContext);
+    const history = useHistory();
+    const [error, setError] = useState(false);
+
     const initialValues = {
         email: '',
         password: '',
@@ -19,13 +28,20 @@ const LoginForm = () => {
             .email('Please use valid email address'),
         password: Yup.string()
             .trim()
-            .min(6, 'Password should be at least 6 characters long')
-            .required('Please provide a valid password'),
+            .required('Please provide a password'),
     });
 
-    const onSubmit = async (values, onSubmitProps) => {
+    const onSubmit = (values, onSubmitProps) => {
+        setError(false)
+
+        signIn(values).then(data => {
+            setUser(data.user)
+            setUserTokenToLocalStorage(data.token)
+            history.push('/');
+        }).catch(error => {
+            setError(true)
+        })
         onSubmitProps.setSubmitting(false);
-        onSubmitProps.resetForm({});
     };
 
     return (
@@ -48,7 +64,7 @@ const LoginForm = () => {
                             className="form-input"
                             autoComplete="off"
                         />
-                        <ErrorMessage name="email" component={ErrorLabel} />
+                        <ErrorMessage name="email" component={ErrorLabel}/>
                     </div>
                     <div className="form-group">
                         <label className="form-label" htmlFor="password">
@@ -61,9 +77,11 @@ const LoginForm = () => {
                             className="form-input"
                             autoComplete="off"
                         />
-                        <ErrorMessage name="password" component={ErrorLabel} />
+                        <ErrorMessage name="password" component={ErrorLabel}/>
                     </div>
-
+                    {error && (
+                        <div className="form-error-label--big">Invalid login details</div>
+                    )}
                     <button
                         className="form-btn"
                         type="submit"
@@ -77,4 +95,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default SigninForm;

@@ -29,7 +29,7 @@ exports.signIn = async (req, res) => {
 
         res.json({ user, token });
     } catch (error) {
-        res.status(400).json({ error: 'Wrong credentials provided' });
+        res.status(400).json({ message: 'Wrong credentials provided' });
     }
 };
 

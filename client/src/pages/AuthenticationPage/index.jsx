@@ -1,12 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import LoginForm from '../../components/forms/LoginForm';
+import SigninForm from '../../components/forms/SigninForm';
 import SignupForm from '../../components/forms/SignupForm';
 
 import './styles.scss';
 
-const SignIn = ({signin}) => {
+const AuthenticationPage = ({signin}) => {
     return (
         <div className="authentication-background">
             <div className="authentication-container">
@@ -18,7 +18,7 @@ const SignIn = ({signin}) => {
                     />
                 </a>
                 <h1>{signin ? 'Log in' : 'Sign up'}</h1>
-                {signin ? <LoginForm/> : <SignupForm/>}
+                {signin ? <SigninForm/> : <SignupForm/>}
                 <div className="authentication-separator"/>
                 <p className="authentication-redirect">
                     {signin ? (
@@ -38,4 +38,4 @@ const SignIn = ({signin}) => {
     );
 };
 
-export default SignIn;
+export default AuthenticationPage;

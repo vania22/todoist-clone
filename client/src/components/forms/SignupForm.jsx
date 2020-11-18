@@ -1,17 +1,18 @@
-import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, {useState, useContext} from 'react';
+import {useHistory} from 'react-router-dom';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 
 import ErrorLabel from './ErrorLabel';
-import { UserContext } from '../../contexts/UserContextProvider.js';
+
+import {UserContext} from '../../contexts/UserContextProvider.js';
+import {setUserTokenToLocalStorage, signUp} from '../../api/authentication';
 
 import './styles.scss';
 
-import { signUp } from '../../api/authentication';
 
 const SignupForm = () => {
-    const { setUser } = useContext(UserContext);
+    const {setUser} = useContext(UserContext);
     const history = useHistory();
     const [error, setError] = useState('');
 
@@ -37,6 +38,7 @@ const SignupForm = () => {
     });
 
     const onSubmit = (values, onSubmitProps) => {
+        setError('')
         const data = {
             username: values.name,
             email: values.email,
@@ -44,15 +46,13 @@ const SignupForm = () => {
         };
 
         signUp(data)
-            .then((response) => {
-                setUser(response.user);
-                localStorage.setItem('jwt', response.token);
+            .then((data) => {
+                setUser(data.user);
+                setUserTokenToLocalStorage(data.token)
                 history.push('/');
             })
             .catch((error) => setError(error.response.data.error));
-
         onSubmitProps.setSubmitting(false);
-        onSubmitProps.resetForm({});
     };
 
     return (
@@ -76,7 +76,7 @@ const SignupForm = () => {
                                 className="form-input"
                                 autoComplete="off"
                             />
-                            <ErrorMessage name="name" component={ErrorLabel} />
+                            <ErrorMessage name="name" component={ErrorLabel}/>
                         </div>
                         <div className="form-group">
                             <label className="form-label" htmlFor="email">
@@ -89,7 +89,7 @@ const SignupForm = () => {
                                 className="form-input"
                                 autoComplete="off"
                             />
-                            <ErrorMessage name="email" component={ErrorLabel} />
+                            <ErrorMessage name="email" component={ErrorLabel}/>
                         </div>
                         <div className="form-group">
                             <label className="form-label" htmlFor="password">
