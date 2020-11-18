@@ -1,21 +1,29 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
 import AuthenticationPage from './pages/AuthenticationPage/';
+import PotectedRoute from "./pages/PotectedRoute";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
     return (
         <>
-            <Route
+            <PotectedRoute
                 exact
                 path="/signin"
-                render={() => <AuthenticationPage login />}
+                component={() => <AuthenticationPage signin/>}
             />
-            <Route
+
+            <PotectedRoute
                 exact
                 path="/signup"
-                render={() => <AuthenticationPage signup />}
+                component={() => <AuthenticationPage signup/>}
             />
+            <PotectedRoute
+                path="/"
+                component={HomePage}
+            />
+
         </>
     );
 };

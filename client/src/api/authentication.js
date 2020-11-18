@@ -9,3 +9,7 @@ export const signUp = async (values) => {
 
     return data;
 };
+
+export const getUserToken = () => {
+    return JSON.parse(localStorage.getItem('jwt'));
+}

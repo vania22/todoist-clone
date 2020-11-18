@@ -4,13 +4,14 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import ErrorLabel from './ErrorLabel';
-import { AppContext } from '../../contexts/userContext.js';
+import { UserContext } from '../../contexts/UserContextProvider.js';
 
 import './styles.scss';
+
 import { signUp } from '../../api/authentication';
 
 const SignupForm = () => {
-    const { setUser } = useContext(AppContext);
+    const { setUser } = useContext(UserContext);
     const history = useHistory();
     const [error, setError] = useState('');
 

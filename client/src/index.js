@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.scss';
 import App from './App';
-import AppContextProvider from './contexts/userContext';
+import UserContextProvider from './contexts/UserContextProvider';
+import TodoContextProvider from "./contexts/TodoContextProvider";
 
 ReactDOM.render(
     <Router>
-        <AppContextProvider>
-            <App />
-        </AppContextProvider>
+        <UserContextProvider>
+            <TodoContextProvider>
+                <App />
+            </TodoContextProvider>
+        </UserContextProvider>
     </Router>,
     document.getElementById('root'),
 );
