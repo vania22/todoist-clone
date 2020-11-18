@@ -1,15 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import ListItem from "../ListItem";
 
 import './styles.scss'
+import {TodoContext} from "../../contexts/TodoContexProvider";
 
 const LeftPanel = () => {
+    const {state} = useContext(TodoContext)
     return (
         <aside className='home-left-panel'>
             <div className='lists-container'>
-                <ListItem id='' color='pink' name='All Tasks'/>
-                <ListItem id='1' color='crimson' name='Weekend'/>
+                <ListItem id='all' color='pink' name='All Tasks'/>
+                {state.map(list => (
+                    <ListItem id={list._id} color={list.color} name={list.name} key={list._id}/>
+                ))}
             </div>
         </aside>
     )

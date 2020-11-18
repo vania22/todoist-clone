@@ -19,7 +19,8 @@ const App = () => {
                 component={() => <AuthenticationPage signup/>}
             />
             <PotectedRoute
-                path="/"
+                path="/:listId"
+                exact
                 component={HomePage}
             />
 

@@ -1,13 +1,16 @@
 import React, {useContext, useEffect} from 'react';
 
-import {TodoContext} from "../../contexts/TodoContextProvider";
+import {TodoContext} from "../../contexts/TodoContexProvider";
 
 import Header from "../../components/Header";
 import LeftPanel from "../../components/LeftPanel";
 import RightPanel from "../../components/RightPanel";
 
-import './styles.scss'
 import {getAllLists} from "../../api/lists";
+
+import './styles.scss'
+import {setLists} from "../../contexts/TodoContexProvider/actions";
+
 
 const HomePage = () => {
     const {dispatch} = useContext(TodoContext);
@@ -15,6 +18,7 @@ const HomePage = () => {
     useEffect(() => {
         getAllLists().then(data => {
             console.log(data)
+            dispatch(setLists(data))
         })
     }, [])
 
