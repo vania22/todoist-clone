@@ -3,8 +3,7 @@ import React from 'react';
 import './styles.scss'
 
 const RightPanel = () => {
-
-    return(
+    return (
         <div className='home-right-panel'>
             <div>hgello</div>
         </div>

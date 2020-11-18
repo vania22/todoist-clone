@@ -2,21 +2,26 @@ const mongoose = require('mongoose');
 const Task = require('./task');
 
 const listSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
+        name: {
+            type: String,
+            required: true,
+        },
+        color: {
+            type: String,
+            required: true,
+            default: '#fff',
+        },
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User',
+        },
     },
-    color: {
-        type: String,
-        required: true,
-        default: '#fff',
-    },
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User',
-    },
-});
+    {
+        toJSON: {
+            virtuals: true
+        }
+    });
 
 listSchema.virtual('tasks', {
     ref: 'Task',
@@ -26,7 +31,7 @@ listSchema.virtual('tasks', {
 
 listSchema.pre('remove', async function (next) {
     const list = this;
-    await Task.deleteMany({ listId: list._id });
+    await Task.deleteMany({listId: list._id});
 
     next();
 });

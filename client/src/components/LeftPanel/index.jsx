@@ -5,7 +5,6 @@ import ListItem from "../ListItem";
 import './styles.scss'
 
 const LeftPanel = () => {
-
     return (
         <aside className='home-left-panel'>
             <div className='lists-container'>

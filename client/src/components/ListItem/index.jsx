@@ -23,7 +23,6 @@ const ListItem = ({id, name, color}) => {
                 <div className='list-item-name'>{name}</div>
             </div>
         </Link>
-
     )
 }
 

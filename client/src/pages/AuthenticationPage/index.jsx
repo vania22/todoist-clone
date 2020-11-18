@@ -10,13 +10,13 @@ const AuthenticationPage = ({signin}) => {
     return (
         <div className="authentication-background">
             <div className="authentication-container">
-                <a href="#">
+                <Link to='/'>
                     <img
                         className="logo"
                         alt="Todoist"
                         src="https://d3ptyyxy2at9ui.cloudfront.net/logo-e7e40b.svg"
                     />
-                </a>
+                </Link>
                 <h1>{signin ? 'Log in' : 'Sign up'}</h1>
                 {signin ? <SigninForm/> : <SignupForm/>}
                 <div className="authentication-separator"/>

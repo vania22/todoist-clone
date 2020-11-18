@@ -1,7 +1,7 @@
 import React from 'react';
 
-import AuthenticationPage from './pages/AuthenticationPage/';
 import PotectedRoute from "./pages/PotectedRoute";
+import AuthenticationPage from './pages/AuthenticationPage/';
 import HomePage from "./pages/HomePage";
 
 const App = () => {

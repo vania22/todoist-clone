@@ -6,10 +6,6 @@
     &:hover {
       @include active-list-item
     }
-
-    &:active {
-      opacity: 0.9;
-    }
   }
 }
 

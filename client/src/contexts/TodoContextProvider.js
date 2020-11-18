@@ -3,7 +3,7 @@ import React, {useReducer} from 'react';
 export const TodoContext = React.createContext([]);
 
 const TodoContextProvider = ({children}) => {
-    const [state, dispatch] = useReducer(reducer, {});
+    const [state, dispatch] = useReducer(reducer, []);
 
     function reducer(state, action) {
         switch (action.type) {

@@ -9,14 +9,14 @@ exports.createList = async (req, res) => {
 
         res.json(list);
     } catch (error) {
-        res.status(400).json({ error });
+        res.status(400).json({error});
     }
 };
 
 exports.updateList = async (req, res) => {
     try {
         const list = await List.findOneAndUpdate(
-            { _id: req.params.id, userId: req.user._id },
+            {_id: req.params.id, userId: req.user._id},
             req.body,
             {
                 new: true,
@@ -27,7 +27,7 @@ exports.updateList = async (req, res) => {
 
         res.json(list);
     } catch (error) {
-        res.status(400).json({ error });
+        res.status(400).json({error});
     }
 };
 
@@ -44,39 +44,36 @@ exports.deleteList = async (req, res) => {
 
         res.json(list);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({error: error.message});
     }
 };
 
 exports.getList = async (req, res) => {
     try {
-        const list = await List.findOne({
-            _id: req.params.id,
-            userId: req.user._id,
-        });
-
-        await list.populate('tasks').execPopulate();
+        const list = await List.findOne({_id: req.params.id, userId: req.user._id,}).populate('tasks').exec();
 
         if (!list) {
-            res.status(400).json({ error: 'Unable to get the list' });
+            res.status(400).json({error: 'Unable to get the list'});
         }
 
-        res.json({ list: list, tasks: list.tasks });
+        res.json(list);
     } catch (error) {
-        res.status(400).json({ error: 'Unable to get the list' });
+        res.status(400).json({error: 'Unable to get the list'});
     }
 };
 
 exports.getLists = async (req, res) => {
     try {
-        const lists = await List.find({ userId: req.user._id });
+        const lists = await List.find({userId: req.user._id}).populate('tasks').exec();
 
         if (lists.length === 0) {
-            res.status(400).json({ error: 'Unable to get the lists' });
+            res.status(400).json({error: 'Unable to get the lists'});
         }
 
         res.json(lists);
     } catch (error) {
-        res.status(400).json({ error: 'Unable to get the lists' });
+        console.log(error)
+
+        res.status(400).json({error: 'Unable to get the lists'});
     }
 };
