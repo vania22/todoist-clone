@@ -24,10 +24,12 @@ const HomePage = () => {
 
     return <div className='home-background'>
         <div className='home-wrapper'>
-            <Header/>
-            <div className='home-container'>
-                <LeftPanel/>
-                <RightPanel/>
+            <div className='home-helper'>
+                <Header/>
+                <div className='home-container'>
+                    <LeftPanel/>
+                    <RightPanel/>
+                </div>
             </div>
         </div>
     </div>

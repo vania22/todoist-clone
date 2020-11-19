@@ -6,20 +6,24 @@
   align-items: center;
   width: 100vw;
   background-color: $page-background-color;
-  height: 100%;
-  padding-top: 15%;
-  padding-bottom: 10%;
-  overflow: auto;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .home-wrapper {
   width: 80%;
-  max-width: 1570px;
+  max-width: 1400px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: $page-container-shadow;
+  height: 670px;
+}
+
+.home-helper {
+  height: 100%;
 }
 
 .home-container {
   display: flex;
+  height: calc(100% - 50px);
 }

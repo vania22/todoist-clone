@@ -4,6 +4,7 @@ import ListItem from "../ListItem";
 
 import './styles.scss'
 import {TodoContext} from "../../contexts/TodoContexProvider";
+import AddList from "../AddList";
 
 const LeftPanel = () => {
     const {state} = useContext(TodoContext)
@@ -15,6 +16,7 @@ const LeftPanel = () => {
                     <ListItem id={list._id} color={list.color} name={list.name} key={list._id}/>
                 ))}
             </div>
+            <AddList/>
         </aside>
     )
 }
