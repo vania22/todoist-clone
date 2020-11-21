@@ -10,7 +10,7 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
     return <Route {...rest} render={(props) => {
         if (user) {
             if (pathname === '/signup' || pathname === '/signin') {
-                return <Redirect to='/all'/>
+                return <Redirect to='/dashboard/all'/>
             }
         } else {
             if (pathname !== '/signup' && pathname !== '/signin') {

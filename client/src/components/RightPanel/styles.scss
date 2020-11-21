@@ -6,3 +6,20 @@
   background-color: #fff;
   height: auto;
 }
+
+.right-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-panel-more-button {
+  font-size: 30px;
+  cursor: pointer;
+  color: $primary_color;
+}
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+}

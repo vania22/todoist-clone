@@ -19,7 +19,7 @@ const App = () => {
                 component={() => <AuthenticationPage signup/>}
             />
             <PotectedRoute
-                path="/:listId"
+                path="/dashboard/:listId"
                 exact
                 component={HomePage}
             />

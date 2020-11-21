@@ -1,7 +1,13 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, useContext} from 'react'
 import {SliderPicker} from 'react-color'
 
+import {TodoContext} from "../../contexts/TodoContexProvider";
+import {createList as createListAction} from '../../contexts/TodoContexProvider/actions';
+import {createList} from "../../api/lists";
+
+
 import './styles.scss';
+
 
 const defaultColors = [
     '#E8C547', '#5C80BC', '#B4DC7F',
@@ -9,6 +15,8 @@ const defaultColors = [
 ]
 
 const AddList = () => {
+    const {dispatch} = useContext(TodoContext);
+    const [name, setName] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [activeColor, setActiveColor] = useState('#E8C547')
     const [showColorPicker, setShowColorPicker] = useState(false)
@@ -22,11 +30,11 @@ const AddList = () => {
         }
 
         return () => document.removeEventListener('mousedown', onDocumentClick)
-    })
+    }, [isDropdownOpen])
 
     const onDocumentClick = e => {
         const withinDropdown = e.path.find(el => el === dropdownRef.current)
-        if (!withinDropdown ) {
+        if (!withinDropdown) {
             setIsDropdownOpen(false)
         }
     }
@@ -37,6 +45,18 @@ const AddList = () => {
 
     const toggleColorPicker = () => {
         setShowColorPicker(showColorPicker => !showColorPicker)
+    }
+
+    const onNameChange = (e) => {
+        setName(e.target.value)
+    }
+
+    const onSubmit = () => {
+        if (name.trim().length > 0) {
+            createList({name, color: activeColor})
+                .then(data => dispatch(createListAction(data)))
+                .catch(error => console.log(error))
+        }
     }
 
     return (
@@ -54,7 +74,13 @@ const AddList = () => {
                 ref={dropdownRef}
             >
                 <div className='close-dropdown-button' onClick={toggleDropdown}>x</div>
-                <input type='text' placeholder='List name' className='dropdown-input'/>
+                <input
+                    type='text'
+                    placeholder='List name'
+                    className='dropdown-input'
+                    value={name}
+                    onChange={onNameChange}
+                />
                 <div className='dropdown-colors-container'>
                     {defaultColors.map(color => (
                         <div
@@ -76,7 +102,7 @@ const AddList = () => {
                     color={activeColor}
                     onChange={(color) => setActiveColor(color.hex)}
                 />}
-                <button className='create-list-button'>Create</button>
+                <button className='create-list-button' onClick={onSubmit}>Create</button>
             </div>
         </div>
 

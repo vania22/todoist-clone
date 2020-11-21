@@ -13,10 +13,15 @@ const TodoContextProvider = ({children}) => {
         localStorage.setItem("state", JSON.stringify(state))
     }, [state])
 
-    function reducer(state, action) {
-        switch (action.type) {
+    function reducer(state, {type, payload}) {
+        switch (type) {
             case ACTION_TYPES.SET_LISTS:
-                return action.payload;
+                return payload;
+            case ACTION_TYPES.CREATE_LIST:
+                return [
+                    ...state,
+                    {...payload, tasks: []}
+                ]
             default:
                 return state;
         }

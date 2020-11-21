@@ -9,7 +9,7 @@ const ListItem = ({id, name, color}) => {
     const isActive = pathname.includes(id)
 
     return (
-        <Link to={`/${id}`}>
+        <Link to={`/dashboard/${id}`}>
             <div className={!isActive ? 'list-item-container' : 'list-item-container--active'}>
                 <div className='list-item-color' style={{backgroundColor: color}}/>
                 <div className='list-item-name'>{name}</div>

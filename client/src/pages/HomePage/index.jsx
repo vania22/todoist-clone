@@ -16,10 +16,11 @@ const HomePage = () => {
     const {dispatch} = useContext(TodoContext);
 
     useEffect(() => {
-        getAllLists().then(data => {
-            console.log(data)
+        getAllLists()
+            .then(data => {
             dispatch(setLists(data))
-        })
+            })
+            .catch(error => console.log(error));
     }, [])
 
     return <div className='home-background'>
