@@ -1,0 +1,70 @@
+@import "../../globalStyles/_variables";
+@import "../../globalStyles/_mixins";
+
+.task-container {
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+  padding: 15px 5px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.task-checkbox {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 30px;
+  background-color: #fafafa;
+  border: 1px solid $page-background-color;
+  transition: background-color 0.1s linear;
+
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid $primary_color;
+  }
+}
+
+.task-checkbox--completed {
+  background-color: $primary_color;
+  border: 1px solid $primary_color;
+  position: relative;
+
+  &:after {
+    content: '✔';
+    position: absolute;
+    left: 5px;
+    bottom: 1.9px;
+    color: #fff;
+    font-size: 20px;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.task-text {
+  line-height: 1.5;
+}
+
+.task-list {
+  margin-left: auto;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-list-name {
+  color: #6D6D6D;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.task-list-color {
+  @include list-color {
+    margin-left: 5px;
+  }
+}

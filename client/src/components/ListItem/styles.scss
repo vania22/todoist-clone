@@ -16,10 +16,9 @@
 }
 
 .list-item-color {
-  border-radius: 100%;
-  height: 10px;
-  width: 10px;
-  margin-right: 10px;
+  @include list-color {
+    margin-right: 10px;
+  }
 }
 
 .list-item-name {

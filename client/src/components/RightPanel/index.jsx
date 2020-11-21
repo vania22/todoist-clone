@@ -5,6 +5,7 @@ import {TodoContext} from "../../contexts/TodoContexProvider";
 
 import './styles.scss'
 import {HiDotsHorizontal} from 'react-icons/hi';
+import TaskItem from "../TaskItem";
 
 
 const RightPanel = () => {
@@ -18,13 +19,13 @@ const RightPanel = () => {
             setList(list)
         } else {
             const allTasks = state.reduce((acc, curr) => {
-               acc = [...acc, ...curr.tasks]
+                acc = [...acc, ...curr.tasks]
                 return acc
             }, [])
             setList({name: 'All Tasks', tasks: allTasks})
         }
 
-    }, [listId])
+    }, [listId, state])
 
     return (
         <div className='home-right-panel'>
@@ -33,7 +34,12 @@ const RightPanel = () => {
                 <HiDotsHorizontal className='right-panel-more-button'/>
             </div>
             <div className='tasks-container'>
-
+                {list.tasks && list.tasks.map(task => (
+                    <TaskItem
+                        key={task._id}
+                        task={task}
+                        showList={listId === 'all'}
+                    />))}
             </div>
         </div>
     )
