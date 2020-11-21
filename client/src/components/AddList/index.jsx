@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {SliderPicker} from 'react-color'
 
 import './styles.scss';
@@ -12,6 +12,24 @@ const AddList = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const [activeColor, setActiveColor] = useState('#E8C547')
     const [showColorPicker, setShowColorPicker] = useState(false)
+    const dropdownRef = useRef();
+
+    useEffect(() => {
+        if (isDropdownOpen) {
+            document.addEventListener('mousedown', onDocumentClick)
+        } else {
+            document.removeEventListener('mousedown', onDocumentClick)
+        }
+
+        return () => document.removeEventListener('mousedown', onDocumentClick)
+    })
+
+    const onDocumentClick = e => {
+        const withinDropdown = e.path.find(el => el === dropdownRef.current)
+        if (!withinDropdown ) {
+            setIsDropdownOpen(false)
+        }
+    }
 
     const toggleDropdown = () => {
         setIsDropdownOpen(isDropdownOpen => !isDropdownOpen)
@@ -27,7 +45,14 @@ const AddList = () => {
                 <span>+</span>
                 <div>Add List</div>
             </button>
-            <div className={isDropdownOpen ? 'add-list-dropdown add-list-dropdown--active' : 'add-list-dropdown'}>
+            <div
+                className={
+                    isDropdownOpen
+                        ? 'add-list-dropdown add-list-dropdown--active'
+                        : 'add-list-dropdown'
+                }
+                ref={dropdownRef}
+            >
                 <div className='close-dropdown-button' onClick={toggleDropdown}>x</div>
                 <input type='text' placeholder='List name' className='dropdown-input'/>
                 <div className='dropdown-colors-container'>
@@ -46,11 +71,11 @@ const AddList = () => {
                     <div className='custom-color-button' onClick={toggleColorPicker}>custom</div>
                 </div>
                 {showColorPicker &&
-                    <SliderPicker
-                        className='color-picker'
-                        color={activeColor}
-                        onChange={(color) => setActiveColor(color.hex)}
-                    />}
+                <SliderPicker
+                    className='color-picker'
+                    color={activeColor}
+                    onChange={(color) => setActiveColor(color.hex)}
+                />}
                 <button className='create-list-button'>Create</button>
             </div>
         </div>
