@@ -40,6 +40,7 @@
 
 .add-list-dropdown {
   position: absolute;
+  z-index: 999;
   display: none;
   flex-direction: column;
   justify-content: flex-start;
@@ -117,6 +118,7 @@
 
 .color-picker {
   position: absolute;
+  z-index: 999;
   top: 105px;
   left: -2px;
   width: 250px;

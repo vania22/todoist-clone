@@ -11,14 +11,8 @@
   margin-top: 5px;
 
   &:hover {
-    .task-list {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .task-more-button {
-      opacity: 1;
-      transition: opacity 0.3s ease;
+    .task-buttons-container {
+      display: block;
     }
   }
 }
@@ -61,6 +55,16 @@
 
 .task-text {
   line-height: 1.5;
+  font-size: 16px;
+  width: 75%;
+  outline: none;
+  border: none;
+  resize: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  vertical-align: center;
+  padding-top: 17px;
 }
 
 .task-right-side-container {
@@ -71,18 +75,20 @@
   justify-content: center;
 }
 
-.task-more-button {
-  cursor: pointer;
-  position: absolute;
-  z-index: 3;
-  opacity: 0;
-}
-
 .task-list {
-  padding-left: 10px;
+  margin-left: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    border-bottom: 2px solid #e0e0e0;
+  }
 }
 
 .task-list-name {
@@ -94,5 +100,20 @@
 .task-list-color {
   @include list-color {
     margin-left: 5px;
+  }
+}
+
+.task-buttons-container {
+  display: none;
+  font-size: 25px;
+  color: #ababab;
+
+  .task-button {
+    margin-left: 15px;
+    cursor: pointer;
+
+    &:hover {
+      color: #727272;
+    }
   }
 }

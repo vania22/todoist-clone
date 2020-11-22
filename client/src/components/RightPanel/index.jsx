@@ -40,6 +40,7 @@ const RightPanel = () => {
                         task={task}
                         showList={listId === 'all'}
                     />))}
+
             </div>
         </div>
     )
