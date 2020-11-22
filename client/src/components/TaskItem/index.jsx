@@ -12,6 +12,7 @@ const TaskItem = ({task: {_id, name, completed, listId}, showList}) => {
     const [list, setList] = useState('');
     const [taskName, setTaskName] = useState(name)
     const [isCompleted, setIsCompleted] = useState(completed)
+    const [isEditing, setIsEditing] = useState(false);
     const textAreaRef = useRef();
 
     useEffect(() => {
@@ -26,6 +27,17 @@ const TaskItem = ({task: {_id, name, completed, listId}, showList}) => {
         textAreaRef.current.style.height = textAreaRef.current.scrollHeight + "px"
     }, [taskName])
 
+
+    const toggleEditing = () => {
+        setIsEditing(isEditing => {
+            if(!isEditing === true) {
+                textAreaRef.current.focus();
+            }
+
+            return !isEditing
+        })
+
+    }
 
     const toggleCompleted = () => {
         setIsCompleted(prevIsCompleted => !prevIsCompleted)
@@ -46,7 +58,7 @@ const TaskItem = ({task: {_id, name, completed, listId}, showList}) => {
                 ref={textAreaRef}
                 value={taskName}
                 onChange={handleTaskName}
-                readOnly={true}
+                readOnly={!isEditing}
             />
             <div className='task-right-side-container'>
                 {showList ?
@@ -56,7 +68,7 @@ const TaskItem = ({task: {_id, name, completed, listId}, showList}) => {
                     </div>
                     :
                     <div className='task-buttons-container'>
-                        <TiPencil className='task-button task-button-edit'/>
+                        <TiPencil className='task-button task-button-edit' onClick={toggleEditing}/>
                         <RiDeleteBin2Line className='task-button ask-button-remove'/>
                     </div>
                 }
