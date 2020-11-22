@@ -1,7 +1,9 @@
 import React, {useState, useContext, useEffect} from 'react';
 
-import './styles.scss';
 import {TodoContext} from "../../contexts/TodoContexProvider";
+
+import {HiDotsHorizontal} from "react-icons/hi";
+import './styles.scss';
 
 const TaskItem = ({task: {_id, name, completed, listId}, showList}) => {
     const {state, dispatch} = useContext(TodoContext);
@@ -27,12 +29,15 @@ const TaskItem = ({task: {_id, name, completed, listId}, showList}) => {
                 onClick={toggleCompleted}
             />
             <p className='task-text'>{name}</p>
-            {showList &&
+            <div className='task-right-side-container'>
+                <HiDotsHorizontal className='right-panel-more-button task-more-button'/>
+                {showList &&
                 <div className='task-list'>
                     <p className='task-list-name'>{list.name}</p>
                     <div className='task-list-color' style={{backgroundColor: list.color}}/>
                 </div>
-            }
+                }
+            </div>
 
         </div>
     )

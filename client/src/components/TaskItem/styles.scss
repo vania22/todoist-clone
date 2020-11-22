@@ -5,8 +5,22 @@
   display: flex;
   justify-items: flex-start;
   align-items: center;
+  position: relative;
   padding: 15px 5px;
   border-bottom: 1px solid #e0e0e0;
+  margin-top: 5px;
+
+  &:hover {
+    .task-list {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .task-more-button {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+  }
 }
 
 .task-checkbox {
@@ -49,8 +63,22 @@
   line-height: 1.5;
 }
 
-.task-list {
+.task-right-side-container {
   margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.task-more-button {
+  cursor: pointer;
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+}
+
+.task-list {
   padding-left: 10px;
   display: flex;
   align-items: center;
